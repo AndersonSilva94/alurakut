@@ -11,5 +11,11 @@
 - [x] Passaremos propriedades para components;
 - [x] Faremos deploy do seu Alurakut na Vercel.
 
+## Dia 2
+- [x] Criar a área de comunidades;
+- [x] Criar input para inserir título da comunidade;
+- [x] Criar input para inserir imagem de capa da comunidade;
+- [x] Pegar informações digitadas e salvá-las no useState().
+
 ---
 :keyboard: com :purple_heart: por [Anderson Silva (Andy)](https://www.linkedin.com/in/andssilva/) 😊
