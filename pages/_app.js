@@ -9,7 +9,10 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    background: #D9E6F6;
+    background-image: url('https://img.elo7.com.br/product/original/1AA0968/game-of-thrones-painel-festa-1-50x1m-temas.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
     font-family: sans-serif;
   }
 
