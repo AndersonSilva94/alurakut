@@ -17,5 +17,13 @@
 - [x] Criar input para inserir imagem de capa da comunidade;
 - [x] Pegar informações digitadas e salvá-las no useState().
 
+## Dia 3
+- [x] Consumir API do Github usando fetch para preencher os nossos amigos;
+- [x] Conhecendo Promises e como lidar com o JSON;
+- [x] Usar o hook useEffect para lidar com código assíncrono;
+- [x] Conhecer o DatoCMS, o sistema de gestão de conteúdo que iremos utilizar na nossa aplicação;
+- [x] Criar os modelos dos conteúdos que iremos gerenciar no DatoCMS;
+- [x] Criar nossas comunidades pela interface do DatoCMS.
+
 ---
 :keyboard: com :purple_heart: por [Anderson Silva (Andy)](https://www.linkedin.com/in/andssilva/) 😊
