@@ -3,52 +3,12 @@ import MainGrid from "../src/components/MainGrid";
 import Box from "../src/components/Box";
 import {
   AlurakutMenu,
-  AlurakutProfileSidebarMenuDefault,
   OrkutNostalgicIconSet,
 } from "../src/lib/AlurakutCommons";
 import { ProfileRelationsBoxWrapper } from "../src/components/ProfileRelations";
-
-const ProfileSidebar = ({ user }) => {
-  return (
-    <Box as="aside">
-      <img
-        src={`https://github.com/${user}.png`}
-        alt="Anderson Silva photo"
-        style={{ borderRadius: "8px" }}
-      />
-      <hr />
-
-      <p>
-        <a className="boxLink" href={`https://github.com/${user}`}>
-          @{user}
-        </a>
-      </p>
-      <hr />
-
-      <AlurakutProfileSidebarMenuDefault />
-    </Box>
-  );
-};
-
-const ProfileRelationsBox = ({ title, array }) => {
-  return (
-    <ProfileRelationsBoxWrapper>
-      <h2 className="smallTitle">{title} ({array.length})</h2>
-      <ul>
-        {array.slice(0, 6).map(({ id, login, avatar_url }) => {
-          return (
-            <li key={id}>
-              <a href={`/users/${login}`}>
-                <img src={avatar_url} alt={`${login} photo`} />
-                <span>{login}</span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </ProfileRelationsBoxWrapper>
-  );
-};
+import ProfileRelationsBox from "../src/components/ProfileRelationsBox";
+import Input from '../src/components/Input';
+import ProfileSidebar from '../src/components/ProfileSidebar';
 
 const initialStateCom = [
   {
@@ -112,24 +72,16 @@ export default function Home() {
             <OrkutNostalgicIconSet />
           </Box>
           <Box>
-            <h2 className="subTitle">O que você deseja fazer?</h2>
+            <h2 className="subTitle">Crie uma comunidade única 😎</h2>
             <form onSubmit={(ev) => handleCreateCommunity(ev)}>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Qual vai ser o nome da sua comunidade?"
-                  name="title"
-                  aria-label="Qual vai ser o nome da sua comunidade?"
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Coloque uma URL para usarmos de capa"
-                  name="image"
-                  aria-label="Coloque uma URL para usarmos de capa"
-                />
-              </div>
+              <Input
+                name="title"
+                placeholder="Qual vai ser o nome da sua comunidade?"
+              />
+              <Input 
+                name="image"
+                placeholder="Coloque uma URL para usarmos de capa"
+              />
               <button>Criar comunidade</button>
             </form>
           </Box>
