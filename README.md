@@ -25,5 +25,11 @@
 - [x] Criar os modelos dos conteúdos que iremos gerenciar no DatoCMS;
 - [x] Criar nossas comunidades pela interface do DatoCMS.
 
+## Dia 4
+- [x] Entenderemos o que é XML e AJAX;
+- [x] Usaremos queries GraphQL para consumir os dados do DatoCMS;
+- [x] Fazer um BFF (Back-end For Front-end) para proteger nossos dados ao enviar dados para o servidor;
+- [x] Criar nossas comunidades pela interface do nosso Alurakut.
+
 ---
 :keyboard: com :purple_heart: por [Anderson Silva (Andy)](https://www.linkedin.com/in/andssilva/) 😊
