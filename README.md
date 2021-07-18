@@ -31,5 +31,17 @@
 - [x] Fazer um BFF (Back-end For Front-end) para proteger nossos dados ao enviar dados para o servidor;
 - [x] Criar nossas comunidades pela interface do nosso Alurakut.
 
+## Dia 5
+- [x] Criar a nossa página de Login;
+- [x] Roteamento com Next.js;
+- [x] Como funciona o redirecionamento de páginas;
+- [x] Formulários com gerenciamento do estado do input;
+- [x] Salvar cookies com o padrão JWT para autenticar nossa página;
+- [x] Decodificar o nosso token para mostrar a nossa Home apenas para usuários autenticados;
+
+## Projeto Final :trophy:
+![Captura de tela de 2021-07-17 23-20-26](https://user-images.githubusercontent.com/52717632/126054560-5586ccd0-ad1b-4c81-8021-fa5b309a1670.png)
+![Captura de tela de 2021-07-17 23-20-46](https://user-images.githubusercontent.com/52717632/126054565-8d91e0d1-9a3f-42c6-96d2-1d55180c3ce8.png)
+
 ---
 :keyboard: com :purple_heart: por [Anderson Silva (Andy)](https://www.linkedin.com/in/andssilva/) 😊

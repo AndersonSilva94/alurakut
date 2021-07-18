@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import nookies from 'nookies';
+import jwt from 'jsonwebtoken';
 import MainGrid from '../src/components/MainGrid';
 import Box from '../src/components/Box';
 import {
@@ -10,23 +12,16 @@ import ProfileRelationsBox from '../src/components/ProfileRelationsBox';
 import Input from '../src/components/Input';
 import ProfileSidebar from '../src/components/ProfileSidebar';
 
-export default function Home() {
+export default function Home({ githubUser }) {
   const [communities, setCommunities] = useState([]);
+  const [userGithub, setUserGithub] = useState('');
   const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
 
-  const user = 'AndersonSilva94';
-  const favoriteUsers = [
-    'MariaCSilva',
-    'rach-vp',
-    'icaroharry',
-    'filipedeschamps',
-    'cyanharlow',
-    'diego3g',
-  ];
+  const user = githubUser;
 
   const handleCreateCommunity = async (ev) => {
     ev.preventDefault();
-    // console.log('OIEEEEEEEE');
 
     const formData = new FormData(ev.target);
 
@@ -54,11 +49,21 @@ export default function Home() {
   useEffect(() => {
     const renderFollowers = async () => {
       // GET
-      const fetchUrl = await fetch(
-        'https://api.github.com/users/AndersonSilva94/followers'
+      const fetchUser = await fetch(`https://api.github.com/users/${user}`);
+      const responseUser = await fetchUser.json();
+      setUserGithub(responseUser.name);
+
+      const fetchFollowers = await fetch(
+        `https://api.github.com/users/${user}/followers`
       );
-      const response = await fetchUrl.json();
-      setFollowers(response);
+      const responseFollowers = await fetchFollowers.json();
+      setFollowers(responseFollowers);
+
+      const fetchFollowing = await fetch(
+        `https://api.github.com/users/${user}/following`
+      );
+      const responseFollowing = await fetchFollowing.json();
+      setFollowing(responseFollowing);
 
       const fetchDato = await fetch('https://graphql.datocms.com/', {
         method: 'POST',
@@ -92,7 +97,7 @@ export default function Home() {
         </div>
         <div className='welcomeArea' style={{ gridArea: 'welcomeArea' }}>
           <Box>
-            <h1 className='title'>Olá! Que bom ter você aqui!</h1>
+            <h1 className='title'>Olá {userGithub}! Que bom ter você aqui!</h1>
 
             <OrkutNostalgicIconSet />
           </Box>
@@ -115,24 +120,8 @@ export default function Home() {
           className='profileRelationsArea'
           style={{ gridArea: 'profileRelationsArea' }}
         >
-          <ProfileRelationsBoxWrapper>
-            <h2 className='smallTitle'>Amigos ({favoriteUsers.length})</h2>
-            <ul>
-              {favoriteUsers.map((favorite) => {
-                return (
-                  <li key={favorite}>
-                    <a href={`/users/${favorite}`}>
-                      <img
-                        src={`https://github.com/${favorite}.png`}
-                        alt={`${favorite} photo`}
-                      />
-                      <span>{favorite}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </ProfileRelationsBoxWrapper>
+          <ProfileRelationsBox title='Seguidores do github' array={ followers }/>
+          <ProfileRelationsBox title='Quem você segue' array={ following }/>
           <ProfileRelationsBoxWrapper>
             <h2 className='smallTitle'>Comunidades ({communities.length})</h2>
             <ul>
@@ -148,9 +137,40 @@ export default function Home() {
               })}
             </ul>
           </ProfileRelationsBoxWrapper>
-          <ProfileRelationsBox title='Seguidores do github' array={ followers }/>
+          
         </div>
       </MainGrid>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context);
+  const token = cookies.USER_TOKEN;
+  
+  const fetchAuth = await fetch('https://alurakut.vercel.app/api/auth', {
+    headers: {
+      Authorization: token,
+    }
+  })
+  const responseApi = await fetchAuth.json()
+  const { isAuthenticated } = responseApi;
+  /* .then((response) => response.json()) */
+  // console.log('auth', isAuthenticated);
+  
+  if(!isAuthenticated) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    }
+  }
+  
+  const { githubUser } = jwt.decode(token);
+  return {
+    props: {
+      githubUser
+    }, // will be passed to the page component as props
+  }
 }
